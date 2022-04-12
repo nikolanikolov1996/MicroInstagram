@@ -1,0 +1,50 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+
+    <div class="card-body">
+        
+        <div class="input-group mt-3">
+            <input type="text" class="form-control" [(ngModel)]="listFilter" placeholder="Search Pictures">
+        </div>
+
+        <div class="row card-group">
+            <div class="col-lg-3 col-md-4 col-sm-6" *ngFor='let photo of paginator'>
+
+                <div class="card-body">
+
+                    <div class="card-header">
+                        {{photo.title.slice(0, 25)}}
+                    </div>
+
+                    <img class="card-img-top rounded img-fluid" (click)="openModal(modal)" [src]='photo.thumbnailUrl'
+                        [title]='photo.title'>
+                    <ng-template #modal>
+                        <div class="modal-content">
+                            <img [src]='photo.url' [style.width.px]='picWidth' [style.height.px]='picHeight'>
+                        </div>
+                    </ng-template>
+
+                    <div class="form-group text-center">
+                        <a class="btn btn-outline-primary" [routerLink]="['/photos/detail', photo.id]">
+                            Details
+                        </a>
+                        <!-- <a class="btn btn-outline-warning" [routerLink]="['/photos/edit', photo.id]">
+                            Edit
+                        </a> -->
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+    Error: {{ errorMessage }}
+</div>
+
+<jw-pagination [items]="filteredPhotos" [pageSize]="20" (changePage)="onChangePage($event)"></jw-pagination>

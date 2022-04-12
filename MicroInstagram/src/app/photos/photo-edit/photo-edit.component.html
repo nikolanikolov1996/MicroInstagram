@@ -1,0 +1,100 @@
+<div class="card">
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+  
+    <div class="card-body">
+      <form novalidate
+            (ngSubmit)="savePhoto()"
+            [formGroup]="photoForm">
+  
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="photoTitleId">Photo Title</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="photoTitleId"
+                   type="text"
+                   placeholder="Name of the photo"
+                   formControlName="title"
+                   [ngClass]="{'is-invalid': displayMessage.title }" />
+            <span class="invalid-feedback">
+              {{displayMessage.title}}
+            </span>
+          </div>
+        </div>
+  
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="albumId">Album ID</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="albumId"
+                   type="text"
+                   placeholder="Please enter album ID"
+                   formControlName="albumId"
+                   [ngClass]="{'is-invalid': displayMessage.albumId}" />
+            <span class="invalid-feedback">
+              {{displayMessage.albumId}}
+            </span>
+          </div>
+        </div>
+  
+        <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label"
+                   for="url">URL</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="url"
+                     type="text"
+                     placeholder="Please enter photo's url"
+                     formControlName="url"
+                     [ngClass]="{'is-invalid': displayMessage.url}" />
+              <span class="invalid-feedback">
+                {{displayMessage.url}}
+              </span>
+            </div>
+          </div>
+  
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label"
+                   for="thumbnailUrl">Thumbnail URL</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="thumbnailUrl"
+                     type="text"
+                     placeholder="Please enter photo's thumbnail url"
+                     formControlName="thumbnailUrl"
+                     [ngClass]="{'is-invalid': displayMessage.thumbnailUrl}" />
+              <span class="invalid-feedback">
+                {{displayMessage.thumbnailUrl}}
+              </span>
+            </div>
+          </div>
+        
+  
+        <div class="form-group row mb-2">
+          <div class="offset-md-2 col-md-4">
+            <button class="btn btn-primary mr-3"
+                    style="width:80px;"
+                    type="submit"
+                    [title]="photoForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                    [disabled]="!photoForm.valid">
+              Save
+            </button>
+            <button class="btn btn-outline-secondary mr-3"
+                    style="width:80px;"
+                    type="button"
+                    title="Cancel your edits"
+                    (click)="onSaveComplete()">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  
+    <div class="alert alert-danger"
+         *ngIf="errorMessage">{{errorMessage}}
+    </div>
+  </div>
